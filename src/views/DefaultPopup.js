@@ -11,7 +11,7 @@ const CONTAINER_MARGIN_TOP = (
     ?
     isIphoneX() ? 44 : 20
     :
-    StatusBar.currentHeight + 10);  // Just to add a bit more padding
+    10);  // Just to add a bit more padding
 
 const slideOffsetYToTranslatePixelMapping = {
   inputRange: [0, 1],
