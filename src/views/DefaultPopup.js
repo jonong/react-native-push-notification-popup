@@ -245,6 +245,8 @@ export default class DefaultPopup extends Component {
 const styles = StyleSheet.create({
   popupContainer: {
     position: 'absolute',
+    left: 8,
+    right: 8,
     minHeight: 86,
     width: deviceWidth - (8 * 2),
     top: CONTAINER_MARGIN_TOP,
