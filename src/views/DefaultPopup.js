@@ -152,9 +152,11 @@ export default class DefaultPopup extends Component {
               </View>
             </View>
             <View style={styles.contentContainer}>
-              <View style={styles.contentTitleContainer}>
-                <Text style={styles.contentTitle}>{title || ''}</Text>
-              </View>
+              {!!title && (
+                <View style={styles.contentTitleContainer}>
+                  <Text style={styles.contentTitle}>{title || ''}</Text>
+                </View>
+              )}
               <View style={styles.contentTextContainer}>
                 <Text style={styles.contentText}>{body || ''}</Text>
               </View>
@@ -311,6 +313,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   contentTitleContainer: {
+    marginBottom: 5,
   },
   contentTitle: {
     fontSize: 15,
@@ -323,6 +326,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 14,
     color: '#808080',
-    marginTop: 5,
   },
 });
