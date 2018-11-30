@@ -69,6 +69,10 @@ export default class DefaultPopup extends Component {
       timeText: null,
       title: null,
       body: null,
+      headerTextStyle: {},
+      timeTextStyle: {},
+      titleTextStyle: {},
+      contentTextStyle: {},
     };
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (e, gestureState) => true,
@@ -127,7 +131,8 @@ export default class DefaultPopup extends Component {
   render() {
     const {
       show, containerSlideOffsetY, containerDragOffsetY, containerScale,
-      onPressAndSlideOut, appIconSource, appTitle, timeText, title, body
+      onPressAndSlideOut, appIconSource, appTitle, timeText, title, body,
+      headerTextStyle, timeTextStyle, titleTextStyle, contentTextStyle,
     } = this.state;
 
     if (!show) {
@@ -145,20 +150,20 @@ export default class DefaultPopup extends Component {
                 <Image style={styles.headerIcon} source={appIconSource || null} />
               </View>
               <View style={styles.headerTextContainer}>
-                <Text style={styles.headerText} numberOfLines={1}>{appTitle || ''}</Text>
+                <Text style={[styles.headerText, headerTextStyle]} numberOfLines={1}>{appTitle || ''}</Text>
               </View>
               <View style={styles.headerTimeContainer}>
-                <Text style={styles.headerTime} numberOfLines={1}>{timeText || ''}</Text>
+                <Text style={[styles.headerTime, timeTextStyle]} numberOfLines={1}>{timeText || ''}</Text>
               </View>
             </View>
             <View style={styles.contentContainer}>
               {!!title && (
                 <View style={styles.contentTitleContainer}>
-                  <Text style={styles.contentTitle}>{title || ''}</Text>
+                  <Text style={[styles.contentTitle, titleTextStyle]}>{title || ''}</Text>
                 </View>
               )}
               <View style={styles.contentTextContainer}>
-                <Text style={styles.contentText}>{body || ''}</Text>
+                <Text style={[styles.contentText, contentTextStyle]}>{body || ''}</Text>
               </View>
             </View>
           </View>
@@ -231,7 +236,7 @@ export default class DefaultPopup extends Component {
 
     // Put message configs into state && show popup
     const _messageConfig = messageConfig || {};
-    const { onPress: onPressCallback, appIconSource, appTitle, timeText, title, body } = _messageConfig;
+    const { onPress: onPressCallback, appIconSource, appTitle, timeText, title, body, headerTextStyle, timeTextStyle, titleTextStyle, contentTextStyle } = _messageConfig;
     const onPressAndSlideOut = this.createOnPressWithCallback(onPressCallback);
     this.setState({
       show: true,
@@ -239,7 +244,7 @@ export default class DefaultPopup extends Component {
       slideOutTimer: null,
       containerDragOffsetY: new Animated.Value(0),
       containerScale: new Animated.Value(1),
-      onPressAndSlideOut, appIconSource, appTitle, timeText, title, body
+      onPressAndSlideOut, appIconSource, appTitle, timeText, title, body, headerTextStyle, timeTextStyle, titleTextStyle, contentTextStyle,
     }, this.slideIn);
   }
 }
@@ -249,7 +254,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 8,
     right: 8,
-    minHeight: 86,
     width: deviceWidth - (8 * 2),
     top: CONTAINER_MARGIN_TOP,
     backgroundColor: 'white',  // TEMP
@@ -261,8 +265,8 @@ const styles = StyleSheet.create({
     elevation: 2,
     // iOS
     shadowColor: '#000000',
-    shadowOpacity: 0.5,
-    shadowRadius: 3,
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
     shadowOffset: {
       height: 1,
       width: 0,
@@ -308,7 +312,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     width: '100%',
-    paddingTop: 8,
+    paddingTop: 10,
     paddingBottom: 10,
     paddingHorizontal: 16,
   },
