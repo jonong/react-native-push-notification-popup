@@ -215,7 +215,7 @@ export default class DefaultPopup extends Component {
   countdownToSlideOut = () => {
     const slideOutTimer = setTimeout(() => {
       this.slideOutAndDismiss();
-    }, 10000);  // TODO: customize
+    }, 15000);  // TODO: customize
     this.setState({ slideOutTimer });
   }
 
